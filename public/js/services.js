@@ -4,7 +4,7 @@ var app = angular.module('myApp');
 
 // all services and factories
 
-app.service('db', function($http) {
+app.service('recordDB', function($http) {
     // manage all record api calls
     this.getAll = () => {
         return $http.get('/api');

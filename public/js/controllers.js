@@ -1,9 +1,9 @@
 'use strict';
 var app = angular.module('myApp');
 
-app.controller('mainCtrl', function($scope, db) {
+app.controller('mainCtrl', function($scope, recordDB) {
 
-    db.getAll()
+    recordDB.getAll()
         .then(res => {
             $scope.records = res.data;
             console.log("$scope.records: ", $scope.records)
@@ -13,7 +13,7 @@ app.controller('mainCtrl', function($scope, db) {
         });
 
     $scope.addRecord = () => {
-        db.create($scope.newRecord)
+        recordDB.create($scope.newRecord)
             .then(res => {
                 console.log('res: ', res);
                 var record = res.data;
@@ -27,7 +27,7 @@ app.controller('mainCtrl', function($scope, db) {
     }
 
     $scope.removeRecord = (record) => {
-        db.delete(record)
+        recordDB.delete(record)
             .then(res => {
                 var index = $scope.records.indexOf(record);
                 $scope.records.splice(index, 1);
@@ -84,7 +84,7 @@ app.controller('mainCtrl', function($scope, db) {
         $scope.edittedRecord.date = new Date(record.date);
     }
     $scope.saveEdit = () => {
-        db.update($scope.edittedRecord)
+        recordDB.update($scope.edittedRecord)
             .then(res => {
                 console.log('res: ', res);
                 $scope.records[edittingIndex] = $scope.edittedRecord;
